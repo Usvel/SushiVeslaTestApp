@@ -1,19 +1,18 @@
-package com.example.sushiveslatestapp
+package com.example.sushiveslatestapp.presentation
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentContainerView
+import com.example.sushiveslatestapp.R
+import com.example.sushiveslatestapp.presentation.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -34,11 +33,11 @@ class MainActivity : AppCompatActivity() {
 
         // drawerLayout.openDrawer(navigation)
         //drawerLayout.closeDrawer(navigation)
-        val ss = ObjectAnimator.ofFloat(container, View.SCALE_Y, 1F, 0.6F).apply {
+        val ss = ObjectAnimator.ofFloat(container, View.SCALE_Y, 1F, 0.7F).apply {
             duration = 1000
             interpolator = LinearInterpolator()
         }
-        val s2 = ObjectAnimator.ofFloat(container, View.SCALE_X, 1F, 0.6F).apply {
+        val s2 = ObjectAnimator.ofFloat(container, View.SCALE_X, 1F, 0.7F).apply {
             duration = 1000
             interpolator = LinearInterpolator()
         }
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             duration = 1000
             interpolator = LinearInterpolator()
         }
-        val s4 = ObjectAnimator.ofFloat(container, View.TRANSLATION_X, 0F, 500F).apply {
+        val s4 = ObjectAnimator.ofFloat(container, View.TRANSLATION_X, 0F, 450F).apply {
             duration = 1000
             interpolator = LinearInterpolator()
         }
@@ -57,8 +56,8 @@ class MainActivity : AppCompatActivity() {
         //drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         val animatorSet = AnimatorSet()
         animatorSet.playTogether(ss, s2, s3, s4)
-        animatorSet.start()
-        drawerLayout.openDrawer(navigation)
+        //animatorSet.start()
+        //drawerLayout.openDrawer(navigation)
 
 
         val listenr = object : DrawerLayout.DrawerListener {

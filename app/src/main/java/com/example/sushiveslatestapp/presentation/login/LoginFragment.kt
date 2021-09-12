@@ -1,6 +1,5 @@
-package com.example.sushiveslatestapp
+package com.example.sushiveslatestapp.presentation.login
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,12 +12,17 @@ class LoginFragment : Fragment() {
         fun newInstance() = LoginFragment()
     }
 
+
+
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.login_fragment, container, false)
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
+
+
 }

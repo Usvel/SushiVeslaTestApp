@@ -1,4 +1,4 @@
-package com.example.sushiveslatestapp
+package com.example.sushiveslatestapp.presentation.login
 
 import androidx.lifecycle.ViewModel
 

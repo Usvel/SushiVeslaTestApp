@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_back"
-    tools:context=".MainActivity"
+    tools:context=".presentation.MainActivity"
     tools:openDrawer="start">
 
     <androidx.fragment.app.FragmentContainerView
@@ -15,12 +15,12 @@
         android:layout_height="match_parent"
         android:background="@color/design_default_color_on_primary" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:visibility="gone"
-        android:src="@drawable/e_walle_menu" />
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:visibility="visible"-->
+<!--        android:src="@drawable/e_walle_menu" />-->
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
@@ -47,30 +47,18 @@
             android:textSize="11sp" />
 
 
-        <LinearLayout
-            android:id="@+id/layoutLogout"
+        <TextView
+            android:layout_gravity="bottom|start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
+            android:background="@android:color/transparent"
+            android:text="Logout"
             android:layout_marginStart="34dp"
             android:layout_marginBottom="105dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="27dp"
-                android:src="@drawable/ic_power_settings" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:background="@android:color/transparent"
-                android:text="Logout"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:drawableStart="@drawable/ic_power_settings"
+            android:textColor="@color/black"
+            android:drawablePadding="5dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
