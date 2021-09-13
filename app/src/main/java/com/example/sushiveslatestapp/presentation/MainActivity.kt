@@ -13,9 +13,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentContainerView
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.presentation.home.HomeFragment
+import com.example.sushiveslatestapp.presentation.login.LoginFragment
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, HomeFragment.newInstance()).commit()
+                .add(R.id.container, LoginFragment()).commit()
         }
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
@@ -45,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             duration = 1000
             interpolator = LinearInterpolator()
         }
-        val s4 = ObjectAnimator.ofFloat(container, View.TRANSLATION_X, 0F, 450F).apply {
+        val s4 = ObjectAnimator.ofFloat(container, View.TRANSLATION_X, 0F, 180.dpToPx(this)).apply {
             duration = 1000
             interpolator = LinearInterpolator()
         }
@@ -88,5 +89,10 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    override fun onLogin() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, HomeFragment()).commit()
     }
 }

@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".presentation.login.LoginFragment">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:src="@drawable/e_walle_login"
-        android:visibility="gone" />
+    <!--    <ImageView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:adjustViewBounds="true"-->
+    <!--        android:src="@drawable/e_walle_login"-->
+    <!--        android:visibility="gone" />-->
 
     <ImageView
-        android:id="@+id/imageLeftLong"
+        android:id="@+id/loginImageLeftLong"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
@@ -24,42 +24,41 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/contentStart"
+        android:id="@+id/loginContentStart"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="166dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/contentEnd"
+        android:id="@+id/loginContentEnd"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintGuide_end="27dp" />
 
     <TextView
-        android:id="@+id/textTime"
+        android:id="@+id/loginTextTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
         android:textColor="@color/black"
         android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="@+id/vectorWeather"
+        app:layout_constraintEnd_toStartOf="@+id/loginVectorWeather"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/contentStart"
+        app:layout_constraintStart_toStartOf="@+id/loginContentStart"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="06:20 PM" />
 
     <ImageView
-        android:id="@+id/vectorWeather"
+        android:id="@+id/loginVectorWeather"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/ic_login_cloud"
-        tools:ignore="MissingConstraints" />
+        tools:src="@drawable/ic_login_cloud" />
 
     <TextView
-        android:id="@+id/textDegreeСelsius"
+        android:id="@+id/loginTextCelsius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
@@ -67,52 +66,55 @@
         tools:text="34°С" />
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/weather"
+        android:id="@+id/loginWeather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        app:constraint_referenced_ids="vectorWeather,textDegreeСelsius"
+        app:constraint_referenced_ids="loginVectorWeather,loginTextCelsius"
         app:flow_horizontalGap="10dp"
         app:flow_horizontalStyle="packed"
-        app:layout_constraintBottom_toBottomOf="@+id/textTime"
-        app:layout_constraintEnd_toStartOf="@+id/contentEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/loginTextTime"
+        app:layout_constraintEnd_toStartOf="@+id/loginContentEnd"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@id/textTime"
-        app:layout_constraintTop_toTopOf="@+id/textTime" />
+        app:layout_constraintStart_toEndOf="@id/loginTextTime"
+        app:layout_constraintTop_toTopOf="@+id/loginTextTime" />
 
     <TextView
-        android:id="@+id/textDate"
+        android:id="@+id/loginTextDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constrainedWidth="true"
-        app:layout_constraintEnd_toStartOf="@+id/contentEnd"
+        app:layout_constraintEnd_toStartOf="@+id/loginContentEnd"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@+id/contentStart"
-        app:layout_constraintTop_toBottomOf="@+id/textTime"
+        app:layout_constraintStart_toEndOf="@+id/loginContentStart"
+        app:layout_constraintTop_toBottomOf="@+id/loginTextTime"
         tools:ignore="MissingConstraints"
         tools:text="Nov.10.2020 | Wednesday" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/dateBottomBarrier"
+        android:id="@+id/loginDateBottomBarrier"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="textTime,weather, textDate" />
+        app:constraint_referenced_ids="loginTextTime,loginWeather, loginTextDate" />
 
-    <TextView
-        android:id="@+id/textCreateAccount"
+    <Button
+        android:id="@+id/loginTextCreateAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
+        android:background="@android:color/transparent"
         android:text="Create an account"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/contentEnd"
-        app:layout_constraintStart_toStartOf="@+id/contentStart" />
+        app:layout_constraintEnd_toStartOf="@+id/loginContentEnd"
+        app:layout_constraintStart_toStartOf="@+id/loginContentStart" />
 
     <android.widget.Button
-        android:id="@+id/buttonEntrance"
+        android:id="@+id/loginButtonEntrance"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_marginBottom="31dp"
@@ -122,51 +124,51 @@
         android:textColor="@color/black"
         android:textSize="17sp"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@+id/textCreateAccount"
-        app:layout_constraintEnd_toStartOf="@+id/contentEnd"
-        app:layout_constraintStart_toStartOf="@+id/contentStart"
+        app:layout_constraintBottom_toTopOf="@+id/loginTextCreateAccount"
+        app:layout_constraintEnd_toStartOf="@+id/loginContentEnd"
+        app:layout_constraintStart_toStartOf="@+id/loginContentStart"
         tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/buttonTopBarrier"
+        android:id="@+id/loginButtonTopBarrier"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="textCreateAccount, buttonEntrance" />
+        app:constraint_referenced_ids="loginTextCreateAccount, loginButtonEntrance" />
 
     <ImageView
-        android:id="@+id/imageLogo"
+        android:id="@+id/loginImageLogo"
         android:layout_width="65dp"
         android:layout_height="45dp"
         android:layout_marginBottom="17dp"
         android:src="@drawable/image_logo"
-        app:layout_constraintBottom_toTopOf="@+id/textNameApp"
-        app:layout_constraintStart_toStartOf="@+id/contentStart"
-        app:layout_constraintTop_toTopOf="@id/dateBottomBarrier"
+        app:layout_constraintBottom_toTopOf="@+id/loginTextNameApp"
+        app:layout_constraintStart_toStartOf="@+id/loginContentStart"
+        app:layout_constraintTop_toTopOf="@id/loginDateBottomBarrier"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textNameApp"
+        android:id="@+id/loginTextNameApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/contentStart"
-        app:layout_constraintTop_toBottomOf="@+id/imageLogo" />
+        app:layout_constraintBottom_toTopOf="@+id/loginTextView"
+        app:layout_constraintStart_toStartOf="@+id/loginContentStart"
+        app:layout_constraintTop_toBottomOf="@+id/loginImageLogo" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/loginTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:text="Open An Account For Digital E-Wallet Solutions.Instant Payouts. \n\n Join For Free."
         android:textSize="16sp"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@id/buttonTopBarrier"
-        app:layout_constraintEnd_toStartOf="@id/contentEnd"
-        app:layout_constraintStart_toStartOf="@+id/contentStart"
-        app:layout_constraintTop_toBottomOf="@+id/textNameApp" />
+        app:layout_constraintBottom_toTopOf="@id/loginButtonTopBarrier"
+        app:layout_constraintEnd_toStartOf="@id/loginContentEnd"
+        app:layout_constraintStart_toStartOf="@+id/loginContentStart"
+        app:layout_constraintTop_toBottomOf="@+id/loginTextNameApp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

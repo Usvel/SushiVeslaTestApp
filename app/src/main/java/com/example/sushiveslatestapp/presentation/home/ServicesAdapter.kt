@@ -19,9 +19,23 @@ import com.bumptech.glide.request.target.Target
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.CardviewServiceBinding
 import com.example.sushiveslatestapp.domain.entitys.home.Services
+import com.example.sushiveslatestapp.presentation.dpToPx
 
-class ServicesAdapter(private var items: List<Services> = listOf()) :
+class ServicesAdapter(
+    private var items: List<Services> = listOf(),
+    private val onClick: (Int) -> Unit
+) :
     RecyclerView.Adapter<ServicesViewHolder>() {
+
+    fun setListUsers(newItems: List<Services>) {
+        val lastSize = items.size
+        val newSize = newItems.size - 1
+        items = newItems.toList()
+        if (newSize > lastSize) {
+            notifyItemRangeInserted(lastSize, newSize)
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServicesViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.cardview_service, parent, false)
@@ -30,6 +44,9 @@ class ServicesAdapter(private var items: List<Services> = listOf()) :
 
     override fun onBindViewHolder(holder: ServicesViewHolder, position: Int) {
         holder.bind(items[position])
+        holder.itemView.setOnClickListener {
+            onClick(position)
+        }
     }
 
     override fun getItemCount(): Int = items.size
@@ -69,6 +86,12 @@ class ServicesViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
 
 class ServicesItemDecoration() :
     RecyclerView.ItemDecoration() {
+
+    companion object {
+        private const val OFFSET_HORISONTAL = 13
+        private const val OFFSET_BOTTOM = 10
+    }
+
     override fun getItemOffsets(rect: Rect, v: View, parent: RecyclerView, s: RecyclerView.State) {
         parent.adapter?.let { adapter ->
             val childAdapterPosition = parent.getChildAdapterPosition(v)
@@ -79,17 +102,11 @@ class ServicesItemDecoration() :
                     Log.d("Adapter", childAdapterPosition.toString())
                     0
                 } else {
-                    50
+                    OFFSET_HORISONTAL.dpToPx(v.context).toInt()
                 }
-            rect.left = // Add space/"padding" on right side
-                if ((childAdapterPosition + 1) % 4 == 1) {
-                    Log.d("Adapter", childAdapterPosition.toString())
-                    0
-                } else {
-                    50
-                }
+            rect.left = OFFSET_BOTTOM.dpToPx(v.context).toInt()
             rect.bottom = if (childAdapterPosition < adapter.itemCount - 5) {
-                40
+                10.dpToPx(v.context).toInt()
             } else {
                 0
             }

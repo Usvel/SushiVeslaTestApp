@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sushiveslatestapp.databinding.FragmentHomeBinding
 import com.example.sushiveslatestapp.domain.entitys.home.Services
@@ -15,13 +17,10 @@ import com.example.sushiveslatestapp.presentation.home.services.UsersItemDecorat
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelProvider(requireActivity())[HomeViewModel::class.java]
     }
 
-    private lateinit var viewModel: HomeViewModel
-
-    //private var fragmentInteractor: FragmentListNewsInteractor? = null
     private var usersAdapter: UsersAdapter? = null
     private var servicesAdapter: ServicesAdapter? = null
 
@@ -31,7 +30,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -39,22 +38,31 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // setListeners()
-        // setObservers()
+        setListeners()
+        setObservers()
         initRecyclerUsers()
-        // initListNews()
         initRecyclerServices()
+        // initListNews()
+    }
+
+    private fun setObservers() {
+        viewModel.balance.observe(viewLifecycleOwner) { balance ->
+            binding.homeBalance.text = balance.toString()
+        }
+        viewModel.listUsers.observe(viewLifecycleOwner) { listUsers ->
+            usersAdapter?.setListUsers(listUsers)
+        }
+        viewModel.listServices.observe(viewLifecycleOwner) { listService ->
+            servicesAdapter?.setListUsers(listService)
+        }
     }
 
     private fun initRecyclerUsers() {
-        usersAdapter = UsersAdapter(
-            listOf(
-                Users("Dahsa", "https://pbs.twimg.com/media/ETnk8TzUcAA3Ohj.jpg"),
-                Users("Flag", ""),
-                Users("Flag", ""),
-                Users("Alena", "")
-            )
-        )
+        usersAdapter = UsersAdapter(onClickButton =
+        { Toast.makeText(context, "Add Users", Toast.LENGTH_SHORT).show() },
+            onClickUsers = { position ->
+                Toast.makeText(context, "Users $position", Toast.LENGTH_SHORT).show()
+            })
         binding.homeRecyclerUsers.apply {
             addItemDecoration(UsersItemDecoration())
             adapter = usersAdapter
@@ -62,22 +70,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun initRecyclerServices() {
-        servicesAdapter = ServicesAdapter(
-            listOf(
-                Services("Send Money", ""),
-                Services("Send Money", ""),
-                Services("Send Money", ""),
-                Services("Send Money", ""),
-                Services("Cashback Offer", ""),
-                Services("Movie Tickets", ""),
-                Services("Flight Tickets", ""),
-                Services("More Options", "")
-            )
-        )
+        servicesAdapter = ServicesAdapter(onClick = { position ->
+            Toast.makeText(context, "Services $position", Toast.LENGTH_SHORT).show()
+        })
         binding.homeRecyclerSevice.apply {
             layoutManager = GridLayoutManager(context, 4)
             addItemDecoration(ServicesItemDecoration())
             adapter = servicesAdapter
+        }
+    }
+
+    private fun setListeners() {
+        binding.homeAddBalance.setOnClickListener {
+            Toast.makeText(context, "AddBalance", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -86,10 +91,5 @@ class HomeFragment : Fragment() {
         _binding = null
         usersAdapter = null
         servicesAdapter = null
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        //fragmentInteractor = null
     }
 }

@@ -17,15 +17,28 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.CardviewUserBinding
+import com.example.sushiveslatestapp.domain.entitys.home.Services
 import com.example.sushiveslatestapp.domain.entitys.home.Users
+import com.example.sushiveslatestapp.presentation.dpToPx
 
 class UsersAdapter(
-    private var items: List<Users> = listOf()
+    private var items: List<Users> = listOf(),
+    private val onClickButton: () -> Unit,
+    private val onClickUsers: (Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val TYPE_USER = 0
         private const val TYPE_BUTTON = 1
+    }
+
+    fun setListUsers(newItems: List<Users>) {
+        val lastSize = items.size
+        val newSize = newItems.size - 1
+        items = newItems.toList()
+        if (newSize > lastSize) {
+            notifyItemRangeInserted(lastSize, newSize)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -47,10 +60,16 @@ class UsersAdapter(
         when (holder) {
             is UsersViewHolder -> {
                 holder.bind(items[position - 1])
+                holder.itemView.setOnClickListener {
+                    onClickUsers(position - 1)
+                }
             }
             else -> {
                 holder.itemView.setOnClickListener {
                     Toast.makeText(it.context, "Button", Toast.LENGTH_SHORT).show()
+                }
+                holder.itemView.setOnClickListener {
+                    onClickButton()
                 }
             }
         }
@@ -99,8 +118,12 @@ class UsersViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     }
 }
 
-class UsersItemDecoration() :
-    RecyclerView.ItemDecoration() {
+class UsersItemDecoration() : RecyclerView.ItemDecoration() {
+
+    companion object {
+        private const val OFFSET = 10
+    }
+
     override fun getItemOffsets(rect: Rect, v: View, parent: RecyclerView, s: RecyclerView.State) {
         parent.adapter?.let { adapter ->
             val childAdapterPosition = parent.getChildAdapterPosition(v)
@@ -109,7 +132,7 @@ class UsersItemDecoration() :
                 when (childAdapterPosition) {
                     (adapter.itemCount - 1) -> v.marginRight
                     0 -> 0
-                    else -> 35
+                    else -> OFFSET.dpToPx(v.context).toInt()
                 }
         }
     }
