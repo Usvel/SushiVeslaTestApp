@@ -113,7 +113,7 @@ class UsersViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     }
 }
 
-class UsersItemDecoration() : RecyclerView.ItemDecoration() {
+class UsersItemDecoration : RecyclerView.ItemDecoration() {
 
     companion object {
         private const val OFFSET = 10

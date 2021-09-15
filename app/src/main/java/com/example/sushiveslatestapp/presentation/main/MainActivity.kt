@@ -43,6 +43,13 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
 
+    companion object {
+        private const val DURATION: Long = 500
+        private const val ROTATION = -15F
+        private const val SCALE = 0.7F
+        private const val TRANSLATION = 180
+    }
+
     @Inject
     lateinit var viewModelFactory: DaggerViewModelFactory
 
@@ -143,12 +150,12 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
                         linear.isVisible = true
                     }
                     NetworkRequestState.ERROR -> {
-                        AlertDialog.Builder(this).setTitle("Ошибка!")
-                            .setMessage("Данные не пришли. Повторить запрос?")
-                            .setPositiveButton("Да") { dialog, id ->
+                        AlertDialog.Builder(this).setTitle(getString(R.string.error_title))
+                            .setMessage(getString(R.string.error_mesege))
+                            .setPositiveButton(getString(R.string.yes)) { dialog, id ->
                                 viewModel.getCurrentData()
                             }
-                            .setNegativeButton("Нет") { dialog, id ->
+                            .setNegativeButton(getString(R.string.no)) { dialog, id ->
                             }.create().show()
                     }
                 }
@@ -250,24 +257,27 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
 
     private fun initObjectAnimator() {
         val animatorScaleY =
-            ObjectAnimator.ofFloat(binding.container, View.SCALE_Y, 1F, 0.7F).apply {
-                duration = 500
+            ObjectAnimator.ofFloat(binding.container, View.SCALE_Y, 1F, SCALE).apply {
+                duration = DURATION
                 interpolator = LinearInterpolator()
             }
         val animatorScaleX =
-            ObjectAnimator.ofFloat(binding.container, View.SCALE_X, 1F, 0.7F).apply {
-                duration = 500
+            ObjectAnimator.ofFloat(binding.container, View.SCALE_X, 1F, SCALE).apply {
+                duration = DURATION
                 interpolator = LinearInterpolator()
             }
         val animatorRotation =
-            ObjectAnimator.ofFloat(binding.container, View.ROTATION, 0.0F, -15F).apply {
-                duration = 500
+            ObjectAnimator.ofFloat(binding.container, View.ROTATION, 0.0F, ROTATION).apply {
+                duration = DURATION
                 interpolator = LinearInterpolator()
             }
         val animatorTranslationX =
-            ObjectAnimator.ofFloat(binding.container, View.TRANSLATION_X, 0F, 180.dpToPx(this))
+            ObjectAnimator.ofFloat(binding.container,
+                View.TRANSLATION_X,
+                0F,
+                TRANSLATION.dpToPx(this))
                 .apply {
-                    duration = 500
+                    duration = DURATION
                     interpolator = LinearInterpolator()
                 }
 

@@ -21,6 +21,10 @@ import java.util.*
 
 class HomeFragment : BaseFragment() {
 
+    companion object {
+        private const val SIZE_COLUMN = 4
+    }
+
     private lateinit var viewModel: HomeViewModel
 
     private var usersAdapter: UsersAdapter? = null
@@ -84,12 +88,12 @@ class HomeFragment : BaseFragment() {
                         binding.homeRecyclerUsers.isVisible = true
                     }
                     NetworkRequestState.ERROR -> {
-                        AlertDialog.Builder(context).setTitle("Ошибка!")
-                            .setMessage("Данные не пришли. Повторить запрос?")
-                            .setPositiveButton("Да") { dialog, id ->
+                        AlertDialog.Builder(context).setTitle(getString(R.string.error_title))
+                            .setMessage(getString(R.string.error_mesege))
+                            .setPositiveButton(getString(R.string.yes)) { dialog, id ->
                                 viewModel.getCurrentData()
                             }
-                            .setNegativeButton("Нет") { dialog, id ->
+                            .setNegativeButton(getString(R.string.no)) { dialog, id ->
                             }.create().show()
                     }
                 }
@@ -117,7 +121,7 @@ class HomeFragment : BaseFragment() {
             Toast.makeText(context, "Services $position", Toast.LENGTH_SHORT).show()
         })
         binding.homeRecyclerSevice.apply {
-            layoutManager = GridLayoutManager(context, 4)
+            layoutManager = GridLayoutManager(context, SIZE_COLUMN)
             addItemDecoration(ServicesItemDecoration())
             adapter = servicesAdapter
         }

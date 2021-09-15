@@ -13,10 +13,15 @@ class HomeRepositoryImpl @Inject constructor(
     private val homeDataRemoteSource: HomeRemoteSource,
 ) :
     HomeRepository {
+    companion object {
+        private const val DELAY_TIME: Long = 3
+    }
+
     override fun getHomeData(): Single<HomeData> {
         return memoryCacheHome.getHomeData().flatMap {
             if (it.listServices.isEmpty()) {
-                val balance = homeDataRemoteSource.getBalance().delay(3, TimeUnit.SECONDS)
+                val balance =
+                    homeDataRemoteSource.getBalance().delay(DELAY_TIME, TimeUnit.SECONDS)
                 val users = homeDataRemoteSource.getListUsers()
                 val services = homeDataRemoteSource.geListServices()
                 Single.zip(balance, users, services, { b, u, s ->

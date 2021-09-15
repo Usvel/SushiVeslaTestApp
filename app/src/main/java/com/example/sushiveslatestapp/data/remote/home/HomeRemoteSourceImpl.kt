@@ -7,7 +7,12 @@ import javax.inject.Inject
 
 //Тестовые данные
 class HomeRemoteSourceImpl @Inject constructor() : HomeRemoteSource {
-    override fun getBalance(): Single<Int> = Single.just(20600)
+
+    companion object {
+        private const val BALANCE = 20600
+    }
+
+    override fun getBalance(): Single<Int> = Single.just(BALANCE)
 
     override fun getListUsers(): Single<List<Users>> = Single.just(
         listOf(

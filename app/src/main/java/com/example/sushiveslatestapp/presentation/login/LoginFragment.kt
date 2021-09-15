@@ -109,12 +109,12 @@ class LoginFragment : BaseFragment() {
                         binding.loginShimmer.isVisible = false
                     }
                     NetworkRequestState.ERROR -> {
-                        AlertDialog.Builder(context).setTitle("Ошибка!")
-                            .setMessage("Данные не пришли. Повторить запрос?")
-                            .setPositiveButton("Да") { dialog, id ->
+                        AlertDialog.Builder(context).setTitle(getString(R.string.error_title))
+                            .setMessage(getString(R.string.error_mesege))
+                            .setPositiveButton(getString(R.string.yes)) { dialog, id ->
                                 viewModel.getCurrentData()
                             }
-                            .setNegativeButton("Нет") { dialog, id ->
+                            .setNegativeButton(getString(R.string.no)) { dialog, id ->
                             }.create().show()
                     }
                 }

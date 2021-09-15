@@ -81,12 +81,13 @@ class ServicesViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
     }
 }
 
-class ServicesItemDecoration() :
+class ServicesItemDecoration :
     RecyclerView.ItemDecoration() {
 
     companion object {
         private const val OFFSET_HORISONTAL = 17
         private const val OFFSET_BOTTOM = 10
+        private const val LAST_SERVISES = 5
     }
 
     override fun getItemOffsets(rect: Rect, v: View, parent: RecyclerView, s: RecyclerView.State) {
@@ -94,7 +95,7 @@ class ServicesItemDecoration() :
             val childAdapterPosition = parent.getChildAdapterPosition(v)
                 .let { if (it == RecyclerView.NO_POSITION) return else it }
             rect.left = OFFSET_HORISONTAL.dpToPx(v.context).toInt()
-            rect.bottom = if (childAdapterPosition < adapter.itemCount - 5) {
+            rect.bottom = if (childAdapterPosition < adapter.itemCount - LAST_SERVISES) {
                 OFFSET_BOTTOM.dpToPx(v.context).toInt()
             } else {
                 0
