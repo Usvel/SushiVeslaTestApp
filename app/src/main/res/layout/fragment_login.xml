@@ -4,14 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/back_fragment"
     tools:context=".presentation.login.LoginFragment">
-
-    <!--    <ImageView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:adjustViewBounds="true"-->
-    <!--        android:src="@drawable/e_walle_login"-->
-    <!--        android:visibility="gone" />-->
 
     <ImageView
         android:id="@+id/loginImageLeftLong"
@@ -42,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
-        android:textColor="@color/black"
+        android:textColor="@color/text_one"
         android:textSize="25sp"
         app:layout_constraintEnd_toStartOf="@+id/loginVectorWeather"
         app:layout_constraintHorizontal_bias="0"
@@ -61,7 +55,7 @@
         android:id="@+id/loginTextCelsius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/text_one"
         android:textSize="14sp"
         tools:text="34°С" />
 
@@ -84,6 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textColor="@color/text_two"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@+id/loginContentEnd"
         app:layout_constraintHorizontal_bias="0"
@@ -107,7 +102,7 @@
         android:background="@android:color/transparent"
         android:text="Create an account"
         android:textAllCaps="false"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_one"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/loginContentEnd"
@@ -121,7 +116,7 @@
         android:background="@drawable/custom_button"
         android:text="Sign in ➞"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="@color/text_btn"
         android:textSize="17sp"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/loginTextCreateAccount"
@@ -152,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
-        android:textColor="@color/black"
+        android:textColor="@color/text_one"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/loginTextView"
@@ -165,6 +160,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:text="Open An Account For Digital E-Wallet Solutions.Instant Payouts. \n\n Join For Free."
+        android:textColor="@color/text_two"
         android:textSize="16sp"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@id/loginButtonTopBarrier"

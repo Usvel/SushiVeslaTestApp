@@ -4,9 +4,15 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
+import android.view.Gravity
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
@@ -28,6 +34,8 @@ import com.example.sushiveslatestapp.presentation.dpToPx
 import com.example.sushiveslatestapp.presentation.home.HomeFragment
 import com.example.sushiveslatestapp.presentation.login.LoginFragment
 import android.view.ViewGroup
+import androidx.core.view.forEach
+import androidx.core.view.forEachIndexed
 import androidx.core.view.isVisible
 import com.example.sushiveslatestapp.App
 import com.example.sushiveslatestapp.presentation.factory.DaggerViewModelFactory
@@ -59,7 +67,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
         initDrawerLayout()
         initNavigation()
         initObjectAnimator()
-        initTogle()
+        initToggle()
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -70,7 +78,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
     private fun setListeners() {
         binding.menuLogout.setOnClickListener {
             binding.toggleButton.toggle()
-            binding.toggleButton.isVisible = false
+            viewModel.deleteData()
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, LoginFragment()).commit()
         }
@@ -119,10 +127,21 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
                     }
                 }).into(imageUser)
         }
+
+        viewModel.toggleVisibility.observe(this) {
+            binding.toggleButton.isVisible = it
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        //DrawerLayout не отвечает первое время
+        if (binding.toggleButton.isChecked)
+            binding.toggleButton.toggle()
+        super.onSaveInstanceState(outState)
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    private fun initTogle() {
+    private fun initToggle() {
         binding.toggleButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 disableEnableControls(false, binding.container)
@@ -139,7 +158,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
     }
 
     private fun initNavigation() {
-        binding.navigationView.menu.getItem(0).isChecked = true
+        setStyleText(binding.navigationView.menu.getItem(0).itemId)
         binding.navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
@@ -152,7 +171,30 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
                 R.id.nav_help -> Toast.makeText(this, "Help", Toast.LENGTH_SHORT).show()
                 else -> Toast.makeText(this, "Else", Toast.LENGTH_SHORT).show()
             }
+            setStyleText(it.itemId)
             true
+        }
+    }
+
+    private fun getStyleSpannableString(s: String, typeface: Int): SpannableString {
+        val str = SpannableString(s)
+        str.setSpan(
+            StyleSpan(typeface),
+            0,
+            s.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        return str
+    }
+
+
+    private fun setStyleText(itemId: Int) {
+        binding.navigationView.menu.forEach { item ->
+            if (item.itemId == itemId) {
+                item.title = getStyleSpannableString(item.title.toString(), Typeface.BOLD)
+            } else {
+                item.title = getStyleSpannableString(item.title.toString(), Typeface.NORMAL)
+            }
         }
     }
 
@@ -198,7 +240,6 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
         viewModel.getCurrentData()
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, HomeFragment()).commit()
-        binding.toggleButton.isVisible = true
     }
 
     private fun disableEnableControls(enable: Boolean, vg: ViewGroup) {

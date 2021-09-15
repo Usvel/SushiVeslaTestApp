@@ -12,10 +12,18 @@ class MenuViewModel @Inject constructor(private val menuUseCase: GetUserUseCase)
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
+    private val _toggleVisibility: MutableLiveData<Boolean> = MutableLiveData()
+    val toggleVisibility: LiveData<Boolean> = _toggleVisibility
+
     private val _user: MutableLiveData<User> = MutableLiveData()
     val user: LiveData<User> = _user
 
+    init {
+        _toggleVisibility.value = false
+    }
+
     fun getCurrentData() {
+        _toggleVisibility.value = true
         compositeDisposable.add(
             menuUseCase.getUser().subscribe({
                 _user.value = it
@@ -23,6 +31,10 @@ class MenuViewModel @Inject constructor(private val menuUseCase: GetUserUseCase)
 
             })
         )
+    }
+
+    fun deleteData() {
+        _toggleVisibility.value = false
     }
 
     override fun onCleared() {
