@@ -9,7 +9,6 @@ import com.example.sushiveslatestapp.domain.entitys.login.Weather
 import com.example.sushiveslatestapp.domain.usecases.GetLoginUseCase
 import com.example.sushiveslatestapp.presentation.NetworkRequestState
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -35,8 +34,8 @@ class LoginViewModel @Inject constructor(private val loginUseCase: GetLoginUseCa
             val weather =
                 loginUseCase.getWeather().toObservable()
             compositeDisposable.add(
-                Observable.combineLatest(dateTime, weather, { dateTime, weatger ->
-                    LoginData(dateTime, weatger)
+                Observable.combineLatest(dateTime, weather, { dateTime, weather ->
+                    LoginData(dateTime, weather)
                 }).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe({
                         _weather.value = it.weather

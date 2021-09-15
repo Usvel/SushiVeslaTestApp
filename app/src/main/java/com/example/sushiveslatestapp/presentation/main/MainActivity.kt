@@ -38,8 +38,8 @@ import androidx.core.view.isVisible
 import com.example.sushiveslatestapp.App
 import com.example.sushiveslatestapp.presentation.NetworkRequestState
 import com.example.sushiveslatestapp.presentation.factory.DaggerViewModelFactory
-import com.facebook.shimmer.Shimmer
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
 
@@ -152,10 +152,10 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
                     NetworkRequestState.ERROR -> {
                         AlertDialog.Builder(this).setTitle(getString(R.string.error_title))
                             .setMessage(getString(R.string.error_mesege))
-                            .setPositiveButton(getString(R.string.yes)) { dialog, id ->
+                            .setPositiveButton(getString(R.string.yes)) { _, _ ->
                                 viewModel.getCurrentData()
                             }
-                            .setNegativeButton(getString(R.string.no)) { dialog, id ->
+                            .setNegativeButton(getString(R.string.no)) { _, _ ->
                             }.create().show()
                     }
                 }
@@ -305,7 +305,10 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
     private fun disableEnableControls(enable: Boolean, vg: ViewGroup) {
         for (i in 0 until vg.childCount) {
             val child = vg.getChildAt(i)
-            child.isClickable = enable
+            child.isEnabled = enable
+            if (child is ViewGroup) {
+                disableEnableControls(enable, child)
+            }
         }
     }
 }

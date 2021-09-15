@@ -15,7 +15,7 @@ class DateTimeReceiverImpl(private val context: Context, private val intentFilte
 
     @SuppressLint("SimpleDateFormat")
     private fun getDateTimeNow(): DateTime {
-        val cal: Calendar = Calendar.getInstance();
+        val cal: Calendar = Calendar.getInstance()
         val dateCal = cal.time
         val formatTime = SimpleDateFormat("KK:mm aa")
         formatTime.timeZone = cal.timeZone

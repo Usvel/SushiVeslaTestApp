@@ -14,7 +14,7 @@ class HomeRepositoryImpl @Inject constructor(
 ) :
     HomeRepository {
     companion object {
-        private const val DELAY_TIME: Long = 3
+        private const val DELAY_TIME: Long = 2
     }
 
     override fun getHomeData(): Single<HomeData> {

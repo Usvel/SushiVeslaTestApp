@@ -111,10 +111,10 @@ class LoginFragment : BaseFragment() {
                     NetworkRequestState.ERROR -> {
                         AlertDialog.Builder(context).setTitle(getString(R.string.error_title))
                             .setMessage(getString(R.string.error_mesege))
-                            .setPositiveButton(getString(R.string.yes)) { dialog, id ->
+                            .setPositiveButton(getString(R.string.yes)) { _, _ ->
                                 viewModel.getCurrentData()
                             }
-                            .setNegativeButton(getString(R.string.no)) { dialog, id ->
+                            .setNegativeButton(getString(R.string.no)) { _, _ ->
                             }.create().show()
                     }
                 }
