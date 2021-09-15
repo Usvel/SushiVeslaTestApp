@@ -4,14 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/back_fragment"
     android:overScrollMode="never"
     tools:context=".presentation.home.HomeFragment">
-
-    <!--        <ImageView-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="match_parent"-->
-    <!--            android:adjustViewBounds="true"-->
-    <!--            android:src="@drawable/e_walle_home" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="13dp"
                 android:text="@string/app_name"
-                android:textColor="@color/black"
+                android:textColor="@color/text_one"
                 android:textSize="30sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -46,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
             android:layout_marginTop="51dp"
-            android:text="Account Overview"
-            android:textColor="#3A4276"
+            android:text="@string/home_overview"
+            android:textColor="@color/home_title"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -58,7 +53,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="27dp"
             android:elevation="6dp"
-            app:cardBackgroundColor="@color/gray_back"
+            app:cardBackgroundColor="@color/back"
             app:cardCornerRadius="15dp">
 
             <TextView
@@ -68,10 +63,24 @@
                 android:layout_gravity="start|top"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="28dp"
-                android:text="20,600"
-                android:textColor="@color/black"
+                android:textColor="@color/balance"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="20,600" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="28dp"
+                android:background="@color/home_title">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="33dp" />
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -79,8 +88,8 @@
                 android:layout_gravity="start|bottom"
                 android:layout_marginStart="28dp"
                 android:layout_marginBottom="29dp"
-                android:text="Current balance"
-                android:textColor="#3A4276"
+                android:text="@string/current_balance"
+                android:textColor="@color/home_title"
                 android:textSize="13sp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -93,7 +102,8 @@
                 android:src="@drawable/ic_add"
                 app:borderWidth="0dp"
                 app:elevation="6dp"
-                app:fabSize="normal" />
+                app:fabSize="normal"
+                app:tint="@color/floating_button" />
 
         </androidx.cardview.widget.CardView>
 
@@ -108,8 +118,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
-                android:text="Send Money"
-                android:textColor="#3A4276"
+                android:text="@string/home_send_money"
+                android:textColor="@color/home_title"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -126,8 +136,41 @@
             android:layout_height="125dp"
             android:layout_marginTop="22dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/cardview_user" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerUsers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="-28dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/button" />
+
+                <include layout="@layout/cardview_user" />
+
+                <include
+                    layout="@layout/cardview_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="3dp" />
+
+                <include
+                    layout="@layout/cardview_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="3dp" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -140,8 +183,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|start"
-                android:text="Services"
-                android:textColor="#3A4276"
+                android:text="@string/home_services"
+                android:textColor="@color/home_title"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -163,6 +206,69 @@
             android:overScrollMode="never"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
+            android:visibility="gone"
             tools:listitem="@layout/cardview_service" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerServices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <include layout="@layout/cardview_service" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <include layout="@layout/cardview_service" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

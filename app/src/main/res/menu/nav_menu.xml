@@ -2,35 +2,36 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-    <group android:id="@+id/group_nav"
+    <group
+        android:id="@+id/group_nav"
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="Home" />
+            android:checked="true"
+            android:title="@string/menu_home" />
 
         <item
             android:id="@+id/nav_profile"
-            android:title="Profile" />
+            android:title="@string/menu_profile" />
 
         <item
             android:id="@+id/nav_accounts"
-            android:title="Accounts" />
+            android:title="@string/menu_accounts" />
 
         <item
             android:id="@+id/nav_transactions"
-            android:title="Transactions" />
+            android:title="@string/menu_transaction" />
 
         <item
             android:id="@+id/nav_starts"
-            android:title="Stats" />
+            android:title="@string/menu_stats" />
 
         <item
             android:id="@+id/nav_settings"
-            android:title="Settings" />
+            android:title="@string/menu_settings" />
 
         <item
             android:id="@+id/nav_help"
-            android:title="Help" />
+            android:title="@string/menu_help" />
     </group>
-
 </menu>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#FFAC30</color>
+    <color name="color_secondary">#FF03DAC5</color>
+    <color name="color_secondary_variant">#FF018786</color>
+    <color name="color_on_primary">#FF000000</color>
+    <color name="color_on_secondary">#000000</color>
+    <color name="back_fragment">#171822</color>
+    <color name="back">#212330</color>
+    <color name="trans">#00000000</color>
+    <color name="text_one">#FFFFFF</color>
+    <color name="text_two">#7B7F9E</color>
+    <color name="text_btn">#212330</color>
+    <color name="home_title">#7B7F9E</color>
+    <color name="balance">#FFFFFF</color>
+    <color name="floating_button">#1B1D28</color>
+    <color name="back_header">#1B1D28</color>
+    <color name="clear">#FFFFFF</color>
+</resources>

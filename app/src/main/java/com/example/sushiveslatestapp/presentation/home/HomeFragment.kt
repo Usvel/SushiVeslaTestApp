@@ -1,21 +1,29 @@
 package com.example.sushiveslatestapp.presentation.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sushiveslatestapp.presentation.base.BaseFragment
 import com.example.sushiveslatestapp.App
+import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.FragmentHomeBinding
+import com.example.sushiveslatestapp.presentation.NetworkRequestState
 import com.example.sushiveslatestapp.presentation.home.services.UsersAdapter
 import com.example.sushiveslatestapp.presentation.home.services.UsersItemDecoration
 import java.text.NumberFormat
 import java.util.*
 
 class HomeFragment : BaseFragment() {
+
+    companion object {
+        private const val SIZE_COLUMN = 4
+    }
 
     private lateinit var viewModel: HomeViewModel
 
@@ -38,7 +46,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -68,11 +76,37 @@ class HomeFragment : BaseFragment() {
         viewModel.listServices.observe(viewLifecycleOwner) { listService ->
             servicesAdapter?.setListUsers(listService)
         }
+        viewModel.networkState.observe(viewLifecycleOwner) {
+            it?.let {
+                when (it) {
+                    NetworkRequestState.SUCCESS -> {
+                        binding.shimmerBalance.isVisible = false
+                        binding.shimmerServices.isVisible = false
+                        binding.shimmerUsers.isVisible = false
+                        binding.homeBalance.isVisible = true
+                        binding.homeRecyclerSevice.isVisible = true
+                        binding.homeRecyclerUsers.isVisible = true
+                    }
+                    NetworkRequestState.ERROR -> {
+                        AlertDialog.Builder(context).setTitle(getString(R.string.error_title))
+                            .setMessage(getString(R.string.error_mesege))
+                            .setPositiveButton(getString(R.string.yes)) { dialog, id ->
+                                viewModel.getCurrentData()
+                            }
+                            .setNegativeButton(getString(R.string.no)) { dialog, id ->
+                            }.create().show()
+                    }
+                }
+            }
+        }
     }
+
 
     private fun initRecyclerUsers() {
         usersAdapter = UsersAdapter(onClickButton =
-        { Toast.makeText(context, "Add Users", Toast.LENGTH_SHORT).show() },
+        {
+            Toast.makeText(context, getString(R.string.toast_add_users), Toast.LENGTH_SHORT).show()
+        },
             onClickUsers = { position ->
                 Toast.makeText(context, "Users $position", Toast.LENGTH_SHORT).show()
             })
@@ -87,7 +121,7 @@ class HomeFragment : BaseFragment() {
             Toast.makeText(context, "Services $position", Toast.LENGTH_SHORT).show()
         })
         binding.homeRecyclerSevice.apply {
-            layoutManager = GridLayoutManager(context, 4)
+            layoutManager = GridLayoutManager(context, SIZE_COLUMN)
             addItemDecoration(ServicesItemDecoration())
             adapter = servicesAdapter
         }
@@ -95,7 +129,7 @@ class HomeFragment : BaseFragment() {
 
     private fun setListeners() {
         binding.homeAddBalance.setOnClickListener {
-            Toast.makeText(context, "AddBalance", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.roast_add), Toast.LENGTH_SHORT).show()
         }
     }
 

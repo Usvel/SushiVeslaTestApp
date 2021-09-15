@@ -4,15 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_back"
+    android:background="@color/back"
     tools:context=".presentation.main.MainActivity">
-
-
-    <!--        <ImageView-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:adjustViewBounds="true"-->
-    <!--            android:src="@drawable/e_walle_menu" />-->
 
     <ToggleButton
         android:id="@+id/toggleButton"
@@ -39,13 +32,12 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/trans"
-            android:fitsSystemWindows="true"
             app:headerLayout="@layout/nav_header"
             app:itemHorizontalPadding="33dp"
             app:itemShapeFillColor="@color/drawer_item_shape"
             app:itemShapeInsetEnd="225dp"
             app:itemShapeInsetStart="0dp"
-            app:itemTextColor="@color/drawer_item_text"
+            app:itemTextColor="@color/text_one"
             app:menu="@menu/nav_menu">
 
             <TextView
@@ -54,7 +46,8 @@
                 android:layout_gravity="start|bottom"
                 android:layout_marginStart="36dp"
                 android:layout_marginBottom="28dp"
-                android:text="Version 2.0.1"
+                android:text="@string/version_app"
+                android:textColor="@color/home_title"
                 android:textSize="11sp" />
 
 
@@ -67,8 +60,8 @@
                 android:layout_marginBottom="105dp"
                 android:background="@android:color/transparent"
                 android:drawablePadding="5dp"
-                android:text="Logout"
-                android:textColor="@color/black"
+                android:text="@string/menu_logout"
+                android:textColor="@color/text_one"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_power_settings" />

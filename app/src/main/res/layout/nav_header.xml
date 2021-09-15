@@ -1,24 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="225dp"
-    android:elevation="3dp"
-    android:background="@drawable/custom_header"
     android:layout_height="115dp"
-    android:layout_marginBottom="85dp">
+    android:layout_marginBottom="85dp"
+    android:background="@drawable/custom_header"
+    android:elevation="3dp">
 
-    <LinearLayout
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/menuShimmer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
         android:layout_marginStart="34dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="34dp">
+
+        <ImageView
+            android:background="@color/home_title"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="35dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:background="@color/home_title" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/home_title" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <LinearLayout
+        android:id="@+id/menuLinear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="34dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/menuImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:srcCompat="@drawable/image_user" />
+            tools:srcCompat="@drawable/image_user" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -31,16 +66,17 @@
                 android:id="@+id/menuUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="Carol Black"
-                android:textSize="17sp" />
+                android:textColor="@color/text_one"
+                android:textSize="17sp"
+                tools:text="Carol Black" />
 
             <TextView
                 android:id="@+id/menuTown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seattle,Washington"
-                android:textSize="11sp" />
+                android:textColor="@color/text_two"
+                android:textSize="11sp"
+                tools:text="Seattle,Washington" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

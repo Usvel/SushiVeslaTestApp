@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.marginRight
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -65,9 +64,6 @@ class UsersAdapter(
             }
             else -> {
                 holder.itemView.setOnClickListener {
-                    Toast.makeText(it.context, "Button", Toast.LENGTH_SHORT).show()
-                }
-                holder.itemView.setOnClickListener {
                     onClickButton()
                 }
             }
@@ -117,7 +113,7 @@ class UsersViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     }
 }
 
-class UsersItemDecoration() : RecyclerView.ItemDecoration() {
+class UsersItemDecoration : RecyclerView.ItemDecoration() {
 
     companion object {
         private const val OFFSET = 10
@@ -127,7 +123,7 @@ class UsersItemDecoration() : RecyclerView.ItemDecoration() {
         parent.adapter?.let { adapter ->
             val childAdapterPosition = parent.getChildAdapterPosition(v)
                 .let { if (it == RecyclerView.NO_POSITION) return else it }
-            rect.right = // Add space/"padding" on right side
+            rect.right =
                 when (childAdapterPosition) {
                     0 -> 0
                     (adapter.itemCount - 1) -> v.marginRight

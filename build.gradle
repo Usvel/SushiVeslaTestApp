@@ -14,6 +14,36 @@ buildscript {
     }
 }
 
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.18.0"
+}
+
+allprojects {
+    apply plugin: "io.gitlab.arturbosch.detekt"
+
+    detekt {
+        toolVersion = "1.18.0"
+        config = files("$rootDir/config/detekt/detekt.yml")
+        buildUponDefaultConfig = true
+        parallel = true
+        reports {
+            html {
+                enabled = true
+                destination = file("$rootDir/build/detekt/detekt.html")
+            }
+            txt {
+                enabled = false
+            }
+            sarif {
+                enabled = false
+            }
+            xml {
+                enabled = false
+            }
+        }
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
