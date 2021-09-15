@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.marginRight
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -64,9 +63,6 @@ class UsersAdapter(
                 }
             }
             else -> {
-                holder.itemView.setOnClickListener {
-                    Toast.makeText(it.context, "Button", Toast.LENGTH_SHORT).show()
-                }
                 holder.itemView.setOnClickListener {
                     onClickButton()
                 }

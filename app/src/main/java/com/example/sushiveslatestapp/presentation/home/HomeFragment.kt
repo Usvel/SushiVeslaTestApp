@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.sushiveslatestapp.presentation.base.BaseFragment
 import com.example.sushiveslatestapp.App
+import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.FragmentHomeBinding
 import com.example.sushiveslatestapp.presentation.home.services.UsersAdapter
 import com.example.sushiveslatestapp.presentation.home.services.UsersItemDecoration
@@ -72,7 +73,7 @@ class HomeFragment : BaseFragment() {
 
     private fun initRecyclerUsers() {
         usersAdapter = UsersAdapter(onClickButton =
-        { Toast.makeText(context, "Add Users", Toast.LENGTH_SHORT).show() },
+        { Toast.makeText(context, getString(R.string.toast_add_users), Toast.LENGTH_SHORT).show() },
             onClickUsers = { position ->
                 Toast.makeText(context, "Users $position", Toast.LENGTH_SHORT).show()
             })
@@ -95,7 +96,7 @@ class HomeFragment : BaseFragment() {
 
     private fun setListeners() {
         binding.homeAddBalance.setOnClickListener {
-            Toast.makeText(context, "AddBalance", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.roast_add), Toast.LENGTH_SHORT).show()
         }
     }
 

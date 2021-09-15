@@ -8,11 +8,9 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
-import android.view.Gravity
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
@@ -161,15 +159,42 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
         setStyleText(binding.navigationView.menu.getItem(0).itemId)
         binding.navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.nav_home -> Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
-                R.id.nav_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
-                R.id.nav_accounts -> Toast.makeText(this, "Accounts", Toast.LENGTH_SHORT).show()
-                R.id.nav_transactions -> Toast.makeText(this, "Transaction", Toast.LENGTH_SHORT)
+                R.id.nav_home -> Toast.makeText(
+                    this,
+                    getString(R.string.menu_home),
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_profile -> Toast.makeText(
+                    this,
+                    getString(R.string.menu_profile),
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_accounts -> Toast.makeText(
+                    this,
+                    getString(R.string.menu_accounts),
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_transactions -> Toast.makeText(
+                    this,
+                    getString(R.string.menu_transaction),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
-                R.id.nav_starts -> Toast.makeText(this, "Stats", Toast.LENGTH_SHORT).show()
-                R.id.nav_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
-                R.id.nav_help -> Toast.makeText(this, "Help", Toast.LENGTH_SHORT).show()
-                else -> Toast.makeText(this, "Else", Toast.LENGTH_SHORT).show()
+                R.id.nav_starts -> Toast.makeText(
+                    this,
+                    getString(R.string.menu_stats),
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_settings -> Toast.makeText(
+                    this,
+                    getString(R.string.menu_settings),
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.nav_help -> Toast.makeText(
+                    this,
+                    getString(R.string.menu_help),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             setStyleText(it.itemId)
             true
