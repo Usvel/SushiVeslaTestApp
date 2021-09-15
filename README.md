@@ -20,11 +20,11 @@
 
 ## Screenshots
 
-![App Screenshot](https://i.ibb.co/xDWMdNB/Screenshot-1631699032.png)
+![App Screenshot](https://drive.google.com/file/d/1JQDC2YoKl3JCiAqxIYBafroZnBh6mktl/view?usp=sharing)
 
 ## Video
 
-[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/serVQC8LIXs)
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/z1Fho5LhEMg)
 
 ## APK
 
