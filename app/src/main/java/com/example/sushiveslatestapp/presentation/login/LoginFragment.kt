@@ -3,7 +3,6 @@ package com.example.sushiveslatestapp.presentation.login
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,20 +14,31 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.example.sushiveslatestapp.presentation.base.BaseFragment
+import com.example.sushiveslatestapp.App
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.FragmentLoginBinding
 import com.example.sushiveslatestapp.presentation.FragmentLoginInteractor
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
 
     private var fragmentInteractor: FragmentLoginInteractor? = null
 
-    private val viewModel: LoginViewModel by lazy {
-        ViewModelProvider(requireActivity())[LoginViewModel::class.java]
-    }
+    private lateinit var viewModel: LoginViewModel
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    override fun initDagger() {
+        (requireActivity().application as App).getAppComponent()
+            .registerLoginComponent()
+            .create()
+            .inject(this)
+    }
+
+    override fun initViewModule() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,6 +61,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setListeners()
         setObservers()
+
+        viewModel.getCurrentData()
+
     }
 
     private fun setObservers() {

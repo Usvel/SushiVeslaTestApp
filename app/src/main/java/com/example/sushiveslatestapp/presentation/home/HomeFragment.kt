@@ -1,31 +1,40 @@
 package com.example.sushiveslatestapp.presentation.home
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.sushiveslatestapp.presentation.base.BaseFragment
+import com.example.sushiveslatestapp.App
 import com.example.sushiveslatestapp.databinding.FragmentHomeBinding
-import com.example.sushiveslatestapp.domain.entitys.home.Services
-import com.example.sushiveslatestapp.domain.entitys.home.Users
 import com.example.sushiveslatestapp.presentation.home.services.UsersAdapter
 import com.example.sushiveslatestapp.presentation.home.services.UsersItemDecoration
+import java.text.NumberFormat
+import java.util.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
-    private val viewModel: HomeViewModel by lazy {
-        ViewModelProvider(requireActivity())[HomeViewModel::class.java]
-    }
+    private lateinit var viewModel: HomeViewModel
 
     private var usersAdapter: UsersAdapter? = null
     private var servicesAdapter: ServicesAdapter? = null
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    override fun initDagger() {
+        (requireActivity().application as App).getAppComponent()
+            .registerHomeComponent()
+            .create()
+            .inject(this)
+    }
+
+    override fun initViewModule() {
+        viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,12 +51,16 @@ class HomeFragment : Fragment() {
         setObservers()
         initRecyclerUsers()
         initRecyclerServices()
-        // initListNews()
+        initData()
+    }
+
+    private fun initData() {
+        viewModel.getCurrentData()
     }
 
     private fun setObservers() {
         viewModel.balance.observe(viewLifecycleOwner) { balance ->
-            binding.homeBalance.text = balance.toString()
+            binding.homeBalance.text = NumberFormat.getNumberInstance(Locale.US).format(balance)
         }
         viewModel.listUsers.observe(viewLifecycleOwner) { listUsers ->
             usersAdapter?.setListUsers(listUsers)

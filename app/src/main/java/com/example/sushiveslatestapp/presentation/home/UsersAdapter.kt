@@ -17,7 +17,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.CardviewUserBinding
-import com.example.sushiveslatestapp.domain.entitys.home.Services
 import com.example.sushiveslatestapp.domain.entitys.home.Users
 import com.example.sushiveslatestapp.presentation.dpToPx
 
@@ -33,8 +32,8 @@ class UsersAdapter(
     }
 
     fun setListUsers(newItems: List<Users>) {
-        val lastSize = items.size
-        val newSize = newItems.size - 1
+        val lastSize = items.size + 1
+        val newSize = newItems.size
         items = newItems.toList()
         if (newSize > lastSize) {
             notifyItemRangeInserted(lastSize, newSize)
@@ -130,8 +129,8 @@ class UsersItemDecoration() : RecyclerView.ItemDecoration() {
                 .let { if (it == RecyclerView.NO_POSITION) return else it }
             rect.right = // Add space/"padding" on right side
                 when (childAdapterPosition) {
-                    (adapter.itemCount - 1) -> v.marginRight
                     0 -> 0
+                    (adapter.itemCount - 1) -> v.marginRight
                     else -> OFFSET.dpToPx(v.context).toInt()
                 }
         }

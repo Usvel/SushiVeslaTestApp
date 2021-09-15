@@ -3,12 +3,13 @@ package com.example.sushiveslatestapp.presentation.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.sushiveslatestapp.domain.entitys.home.Users
 import com.example.sushiveslatestapp.domain.entitys.login.DateTime
 import com.example.sushiveslatestapp.domain.entitys.login.Weather
+import com.example.sushiveslatestapp.domain.usecases.GetLoginUseCase
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel @Inject constructor(private val loginUseCase: GetLoginUseCase) : ViewModel() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
@@ -18,9 +19,19 @@ class LoginViewModel : ViewModel() {
     private val _weather: MutableLiveData<Weather> = MutableLiveData()
     val weather: LiveData<Weather> = _weather
 
-    init {
-        _dateTime.value = DateTime(time = "06:20 PM", date = "Nov.10.2020 | Wednesday")
-        _weather.value = Weather(celsius = "34° C", "")
+    fun getCurrentData() {
+        compositeDisposable.add(
+            loginUseCase.getDateTime().subscribe {
+                _dateTime.value = it
+            }
+        )
+        compositeDisposable.add(
+            loginUseCase.getWeather().subscribe({
+                _weather.value = it
+            }, {
+
+            })
+        )
     }
 
     override fun onCleared() {
