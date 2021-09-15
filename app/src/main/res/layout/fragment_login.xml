@@ -17,6 +17,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/loginShimmer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="@+id/loginTextDate"
+        app:layout_constraintEnd_toStartOf="@+id/loginContentEnd"
+        app:layout_constraintStart_toStartOf="@+id/loginContentStart">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="29dp"
+            android:textColor="@color/text_one"
+            android:textSize="25sp"
+            android:text="00:00 AM" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="51dp"
+            android:background="@color/home_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="10dp"
+            android:text="00°С"
+            android:textColor="@color/text_one"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:layout_marginTop="10dp"
+            android:text="load.00.0000 | Load"
+            android:textColor="@color/text_two"
+            app:layout_constrainedWidth="true" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/loginContentStart"
         android:layout_width="0dp"
@@ -84,7 +129,6 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@+id/loginContentStart"
         app:layout_constraintTop_toBottomOf="@+id/loginTextTime"
-        tools:ignore="MissingConstraints"
         tools:text="Nov.10.2020 | Wednesday" />
 
     <androidx.constraintlayout.widget.Barrier
@@ -121,8 +165,7 @@
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/loginTextCreateAccount"
         app:layout_constraintEnd_toStartOf="@+id/loginContentEnd"
-        app:layout_constraintStart_toStartOf="@+id/loginContentStart"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="@+id/loginContentStart" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/loginButtonTopBarrier"

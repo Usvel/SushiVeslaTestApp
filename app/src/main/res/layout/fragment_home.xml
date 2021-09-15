@@ -63,10 +63,24 @@
                 android:layout_gravity="start|top"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="28dp"
-                tools:text="20,600"
                 android:textColor="@color/balance"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="20,600" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="28dp"
+                android:background="@color/home_title">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="33dp" />
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -122,8 +136,33 @@
             android:layout_height="125dp"
             android:layout_marginTop="22dp"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/cardview_user" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerUsers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/button" />
+
+                <include layout="@layout/cardview_user" />
+
+                <include
+                    layout="@layout/cardview_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="3dp" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -159,6 +198,69 @@
             android:overScrollMode="never"
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
+            android:visibility="gone"
             tools:listitem="@layout/cardview_service" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerServices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <include layout="@layout/cardview_service" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <include layout="@layout/cardview_service" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+
+                <include
+                    layout="@layout/cardview_service"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp" />
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

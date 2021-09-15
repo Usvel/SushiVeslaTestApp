@@ -5,5 +5,6 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class MenuRemoteSourceImpl @Inject constructor() : MenuRemoteSource {
-    override fun getUser(): Single<User> = Single.just(User("Rodion", "", "Volgograd"))
+    override fun getUser(): Single<User> =
+        Single.just(User("Carol", "", "Seattle,Washington"))
 }

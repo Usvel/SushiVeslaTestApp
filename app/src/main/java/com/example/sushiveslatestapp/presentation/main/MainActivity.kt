@@ -3,6 +3,7 @@ package com.example.sushiveslatestapp.presentation.main
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
@@ -33,10 +34,11 @@ import com.example.sushiveslatestapp.presentation.home.HomeFragment
 import com.example.sushiveslatestapp.presentation.login.LoginFragment
 import android.view.ViewGroup
 import androidx.core.view.forEach
-import androidx.core.view.forEachIndexed
 import androidx.core.view.isVisible
 import com.example.sushiveslatestapp.App
+import com.example.sushiveslatestapp.presentation.NetworkRequestState
 import com.example.sushiveslatestapp.presentation.factory.DaggerViewModelFactory
+import com.facebook.shimmer.Shimmer
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
@@ -108,7 +110,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
                         e: GlideException?,
                         model: Any?,
                         target: Target<Drawable>?,
-                        isFirstResource: Boolean
+                        isFirstResource: Boolean,
                     ): Boolean {
                         imageUser.setImageResource(R.drawable.image_user)
                         return true
@@ -119,7 +121,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
                         model: Any?,
                         target: Target<Drawable>?,
                         dataSource: DataSource?,
-                        isFirstResource: Boolean
+                        isFirstResource: Boolean,
                     ): Boolean {
                         return false
                     }
@@ -128,6 +130,29 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
 
         viewModel.toggleVisibility.observe(this) {
             binding.toggleButton.isVisible = it
+        }
+
+        viewModel.networkState.observe(this) {
+            it?.let {
+                when (it) {
+                    NetworkRequestState.SUCCESS -> {
+                        val header = binding.navigationView.getHeaderView(0)
+                        val shimmer = header.findViewById<ViewGroup>(R.id.menuShimmer)
+                        val linear = header.findViewById<ViewGroup>(R.id.menuLinear)
+                        shimmer.isVisible = false
+                        linear.isVisible = true
+                    }
+                    NetworkRequestState.ERROR -> {
+                        AlertDialog.Builder(this).setTitle("Ошибка!")
+                            .setMessage("Данные не пришли. Повторить запрос?")
+                            .setPositiveButton("Да") { dialog, id ->
+                                viewModel.getCurrentData()
+                            }
+                            .setNegativeButton("Нет") { dialog, id ->
+                            }.create().show()
+                    }
+                }
+            }
         }
     }
 

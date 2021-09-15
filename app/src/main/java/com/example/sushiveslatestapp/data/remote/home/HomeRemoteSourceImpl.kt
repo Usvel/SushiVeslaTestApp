@@ -7,28 +7,25 @@ import javax.inject.Inject
 
 //Тестовые данные
 class HomeRemoteSourceImpl @Inject constructor() : HomeRemoteSource {
-    override fun getBalance(): Single<Int> = Single.just(25120)
+    override fun getBalance(): Single<Int> = Single.just(20600)
 
     override fun getListUsers(): Single<List<Users>> = Single.just(
         listOf(
-            Users("Dahsa", "https://pbs.twimg.com/media/ETnk8TzUcAA3Ohj.jpg"),
-            Users("Test", ""),
-            Users("Test", ""),
-            Users("Alena", "")
+            Users("Mike", ""),
+            Users("Joshpeh", ""),
+            Users("Dasha", "https://pbs.twimg.com/media/ETnk8TzUcAA3Ohj.jpg")
         )
     )
 
     override fun geListServices(): Single<List<Services>> = Single.just(
         listOf(
-            Services("Send Money", "https://pbs.twimg.com/media/ETnk8TzUcAA3Ohj.jpg"),
             Services("Send Money", ""),
-            Services("Send Money", ""),
-            Services("Send Money", ""),
+            Services("Receive Money", ""),
+            Services("Mobile Prepaid", ""),
+            Services("Electricity", ""),
             Services("Cashback Offer", ""),
             Services("Movie Tickets", ""),
             Services("Flight Tickets", ""),
-            Services("More Options", ""),
-            Services("Send Money", "https://pbs.twimg.com/media/ETnk8TzUcAA3Ohj.jpg"),
-            Services("Send Money", "https://pbs.twimg.com/media/ETnk8TzUcAA3Ohj.jpg"),
+            Services("More Options", "")
         ))
 }

@@ -123,7 +123,7 @@ class UsersItemDecoration() : RecyclerView.ItemDecoration() {
         parent.adapter?.let { adapter ->
             val childAdapterPosition = parent.getChildAdapterPosition(v)
                 .let { if (it == RecyclerView.NO_POSITION) return else it }
-            rect.right = // Add space/"padding" on right side
+            rect.right =
                 when (childAdapterPosition) {
                     0 -> 0
                     (adapter.itemCount - 1) -> v.marginRight

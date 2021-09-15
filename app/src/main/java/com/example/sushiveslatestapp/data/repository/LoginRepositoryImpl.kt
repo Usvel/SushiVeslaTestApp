@@ -7,6 +7,7 @@ import com.example.sushiveslatestapp.domain.entitys.login.Weather
 import com.example.sushiveslatestapp.domain.repositorys.LoginRepository
 import io.reactivex.Observable
 import io.reactivex.Single
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(

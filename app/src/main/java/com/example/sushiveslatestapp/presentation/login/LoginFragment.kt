@@ -1,11 +1,13 @@
 package com.example.sushiveslatestapp.presentation.login
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -19,6 +21,7 @@ import com.example.sushiveslatestapp.App
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.FragmentLoginBinding
 import com.example.sushiveslatestapp.presentation.FragmentLoginInteractor
+import com.example.sushiveslatestapp.presentation.NetworkRequestState
 
 class LoginFragment : BaseFragment() {
 
@@ -50,7 +53,7 @@ class LoginFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -81,7 +84,7 @@ class LoginFragment : BaseFragment() {
                         e: GlideException?,
                         model: Any?,
                         target: Target<Drawable>?,
-                        isFirstResource: Boolean
+                        isFirstResource: Boolean,
                     ): Boolean {
                         binding.loginVectorWeather.setImageResource(R.drawable.ic_login_cloud)
                         return true
@@ -92,11 +95,30 @@ class LoginFragment : BaseFragment() {
                         model: Any?,
                         target: Target<Drawable>?,
                         dataSource: DataSource?,
-                        isFirstResource: Boolean
+                        isFirstResource: Boolean,
                     ): Boolean {
                         return false
                     }
                 }).into(binding.loginVectorWeather)
+        }
+
+        viewModel.networkState.observe(viewLifecycleOwner) {
+            it?.let {
+                when (it) {
+                    NetworkRequestState.SUCCESS -> {
+                        binding.loginShimmer.isVisible = false
+                    }
+                    NetworkRequestState.ERROR -> {
+                        AlertDialog.Builder(context).setTitle("Ошибка!")
+                            .setMessage("Данные не пришли. Повторить запрос?")
+                            .setPositiveButton("Да") { dialog, id ->
+                                viewModel.getCurrentData()
+                            }
+                            .setNegativeButton("Нет") { dialog, id ->
+                            }.create().show()
+                    }
+                }
+            }
         }
     }
 
