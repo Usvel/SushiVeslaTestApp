@@ -180,7 +180,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
                 animatorSet.start()
             } else {
                 animatorSet.reverse()
-                binding.container.background = getDrawable(R.color.cardview_light_background)
+                binding.container.background = getDrawable(R.color.back_fragment)
                 binding.drawerLayout.closeDrawer(binding.navigationView)
                 disableEnableControls(true, binding.container)
             }
