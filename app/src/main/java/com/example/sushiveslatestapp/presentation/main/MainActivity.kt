@@ -28,7 +28,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.ActivityMainBinding
-import com.example.sushiveslatestapp.presentation.FragmentLoginInteractor
 import com.example.sushiveslatestapp.presentation.dpToPx
 import com.example.sushiveslatestapp.presentation.home.HomeFragment
 import com.example.sushiveslatestapp.presentation.login.LoginFragment

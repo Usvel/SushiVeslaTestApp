@@ -98,11 +98,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="20dp"
-                android:backgroundTint="#FFAC30"
                 android:src="@drawable/ic_add"
+                app:backgroundTint="@color/primary"
                 app:borderWidth="0dp"
                 app:elevation="6dp"
                 app:fabSize="normal"
+                app:rippleColor="@color/back"
                 app:tint="@color/floating_button" />
 
         </androidx.cardview.widget.CardView>
