@@ -9,6 +9,7 @@
     tools:context=".presentation.home.HomeFragment">
 
     <LinearLayout
+        android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

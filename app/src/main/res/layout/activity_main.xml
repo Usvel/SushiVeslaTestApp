@@ -7,6 +7,98 @@
     android:background="@color/back"
     tools:context=".presentation.main.MainActivity">
 
+    <com.example.sushiveslatestapp.presentation.main.MyDrawerLayout
+        android:id="@+id/drawerLayout"
+        android:name="com.example.sushiveslatestapp.presentation.main.MyDrawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/back_fragment" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="230dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/trans">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.navigation.NavigationView
+                        android:id="@+id/navigationViewMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:background="@color/trans"
+                        android:overScrollMode="never"
+                        app:elevation="0dp"
+                        app:headerLayout="@layout/nav_header"
+                        app:itemHorizontalPadding="33dp"
+                        app:itemShapeFillColor="@color/drawer_item_shape"
+                        app:itemShapeInsetEnd="225dp"
+                        app:itemShapeInsetStart="0dp"
+                        app:itemTextColor="@color/text_one"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:menu="@menu/nav_menu" />
+
+                    <FrameLayout
+                        android:id="@+id/navigationVuewLogut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="70dp"
+                        android:background="@color/trans"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/navigationViewMenu"
+                        app:layout_constraintVertical_bias="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|bottom"
+                            android:layout_marginStart="36dp"
+                            android:layout_marginBottom="28dp"
+                            android:text="@string/version_app"
+                            android:textColor="@color/home_title"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/menuLogout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|start"
+                            android:layout_marginStart="34dp"
+                            android:layout_marginBottom="105dp"
+                            android:background="@android:color/transparent"
+                            android:drawablePadding="5dp"
+                            android:text="@string/menu_logout"
+                            android:textColor="@color/text_one"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_power_settings" />
+                    </FrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+        </com.google.android.material.navigation.NavigationView>
+    </com.example.sushiveslatestapp.presentation.main.MyDrawerLayout>
+
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="24dp"
@@ -19,59 +111,4 @@
         android:textOff=""
         android:textOn=""
         android:visibility="gone" />
-
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
-        android:layout_width="230dp"
-        android:layout_height="match_parent"
-        tools:openDrawer="start">
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationView"
-            android:layout_width="230dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/trans"
-            app:headerLayout="@layout/nav_header"
-            app:itemHorizontalPadding="33dp"
-            app:itemShapeFillColor="@color/drawer_item_shape"
-            app:itemShapeInsetEnd="225dp"
-            app:itemShapeInsetStart="0dp"
-            app:itemTextColor="@color/text_one"
-            app:menu="@menu/nav_menu">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start|bottom"
-                android:layout_marginStart="36dp"
-                android:layout_marginBottom="28dp"
-                android:text="@string/version_app"
-                android:textColor="@color/home_title"
-                android:textSize="11sp" />
-
-
-            <TextView
-                android:id="@+id/menuLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|start"
-                android:layout_marginStart="34dp"
-                android:layout_marginBottom="105dp"
-                android:background="@android:color/transparent"
-                android:drawablePadding="5dp"
-                android:text="@string/menu_logout"
-                android:textColor="@color/text_one"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_power_settings" />
-        </com.google.android.material.navigation.NavigationView>
-    </androidx.drawerlayout.widget.DrawerLayout>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/back_fragment" />
-
 </FrameLayout>

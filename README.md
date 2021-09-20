@@ -28,7 +28,7 @@
 
 ## APK
 
-Ссылка на apk: https://drive.google.com/file/d/1zMQWE_ZsQ7a-uTPLuO12YIvOZofmTM5q/view?usp=sharing
+Ссылка на apk: https://drive.google.com/file/d/17PRIKnU4JE3Lg23J0vCyil4cB73wRNUk/view?usp=sharing
 
 ## 🚀 Автор
 
