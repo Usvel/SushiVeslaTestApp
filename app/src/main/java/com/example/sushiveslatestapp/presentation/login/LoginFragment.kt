@@ -20,7 +20,7 @@ import com.example.sushiveslatestapp.presentation.base.BaseFragment
 import com.example.sushiveslatestapp.App
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.FragmentLoginBinding
-import com.example.sushiveslatestapp.presentation.FragmentLoginInteractor
+import com.example.sushiveslatestapp.presentation.main.FragmentLoginInteractor
 import com.example.sushiveslatestapp.presentation.NetworkRequestState
 
 class LoginFragment : BaseFragment() {

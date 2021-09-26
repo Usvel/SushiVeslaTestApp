@@ -109,6 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
+        app:layout_constrainedWidth="true"
         app:constraint_referenced_ids="loginVectorWeather,loginTextCelsius"
         app:flow_horizontalGap="10dp"
         app:flow_horizontalStyle="packed"

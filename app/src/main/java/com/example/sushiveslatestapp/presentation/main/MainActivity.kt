@@ -17,7 +17,6 @@ import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -28,7 +27,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.sushiveslatestapp.R
 import com.example.sushiveslatestapp.databinding.ActivityMainBinding
-import com.example.sushiveslatestapp.presentation.FragmentLoginInteractor
 import com.example.sushiveslatestapp.presentation.dpToPx
 import com.example.sushiveslatestapp.presentation.home.HomeFragment
 import com.example.sushiveslatestapp.presentation.login.LoginFragment
@@ -68,7 +66,6 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
 
         initDagger()
         initViewModule()
-
         setListeners()
         setObservers()
         initDrawerLayout()
@@ -104,7 +101,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
 
     private fun setObservers() {
         viewModel.user.observe(this) { user ->
-            val header = binding.navigationView.getHeaderView(0)
+            val header = binding.navigationViewMenu.getHeaderView(0)
             val imageUser = header.findViewById<ImageView>(R.id.menuImage)
             val townUser = header.findViewById<TextView>(R.id.menuTown)
             val nameUser = header.findViewById<TextView>(R.id.menuUserName)
@@ -143,7 +140,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
             it?.let {
                 when (it) {
                     NetworkRequestState.SUCCESS -> {
-                        val header = binding.navigationView.getHeaderView(0)
+                        val header = binding.navigationViewMenu.getHeaderView(0)
                         val shimmer = header.findViewById<ViewGroup>(R.id.menuShimmer)
                         val linear = header.findViewById<ViewGroup>(R.id.menuLinear)
                         shimmer.isVisible = false
@@ -174,7 +171,6 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
     private fun initToggle() {
         binding.toggleButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                disableEnableControls(false, binding.container)
                 binding.container.background = getDrawable(R.drawable.round_fragment)
                 binding.drawerLayout.openDrawer(binding.navigationView)
                 animatorSet.start()
@@ -182,14 +178,13 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
                 animatorSet.reverse()
                 binding.container.background = getDrawable(R.color.back_fragment)
                 binding.drawerLayout.closeDrawer(binding.navigationView)
-                disableEnableControls(true, binding.container)
             }
         }
     }
 
     private fun initNavigation() {
-        setStyleText(binding.navigationView.menu.getItem(0).itemId)
-        binding.navigationView.setNavigationItemSelectedListener {
+        setStyleText(binding.navigationViewMenu.menu.getItem(0).itemId)
+        binding.navigationViewMenu.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> Toast.makeText(
                     this,
@@ -246,7 +241,7 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
 
 
     private fun setStyleText(itemId: Int) {
-        binding.navigationView.menu.forEach { item ->
+        binding.navigationViewMenu.menu.forEach { item ->
             if (item.itemId == itemId) {
                 item.title = getStyleSpannableString(item.title.toString(), Typeface.BOLD)
             } else {
@@ -293,22 +288,11 @@ class MainActivity : AppCompatActivity(), FragmentLoginInteractor {
         val drawerLayout = binding.drawerLayout
         drawerLayout.drawerElevation = 0F
         drawerLayout.setScrimColor(Color.TRANSPARENT)
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
     }
 
     override fun onLogin() {
         viewModel.getCurrentData()
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, HomeFragment()).commit()
-    }
-
-    private fun disableEnableControls(enable: Boolean, vg: ViewGroup) {
-        for (i in 0 until vg.childCount) {
-            val child = vg.getChildAt(i)
-            child.isEnabled = enable
-            if (child is ViewGroup) {
-                disableEnableControls(enable, child)
-            }
-        }
     }
 }
